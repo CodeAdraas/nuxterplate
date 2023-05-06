@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, type Ref} from 'vue'
 import { useDebounce } from './debounce'
 
 /**
@@ -42,7 +42,7 @@ const ww = ref(process.server
     ? 0
     : window.innerWidth)
 
-export const currentBreakpoint = ref(getBreakpoint())
+export const currentBreakpoint = ref(getBreakpoint()) as Ref<Breakpoint>
 
 /**
  * Checks wheter the current window is past given breakpoint but not exceeding the next one
@@ -78,7 +78,8 @@ export const between = (
  */
 const resizeListener = useDebounce((evt: any) => {
     ww.value = window.innerWidth
-    currentBreakpoint.value = getBreakpoint()
+    let bp = getBreakpoint() as Breakpoint
+    currentBreakpoint.value = bp
 }, 50)
 
 export const useBreakpoint = () => {

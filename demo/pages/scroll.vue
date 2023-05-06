@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const scroll = useScroll()
 const { up, down } = useScrollDirection()
-const gsap = useGsap()
 
 const speed = ref(0)
 const progress = ref(0)
@@ -50,7 +49,7 @@ onMounted(() => scroll.init())
         </util-scroll-text-reveal-letters>
 
         <div
-            v-animation="'fade-in-up'"
+            v-animate="'fade-in-up'"
             ref="cube"
             :style="{
                 background: 'green',

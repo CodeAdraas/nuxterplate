@@ -1,3 +1,4 @@
+import { defineNuxtPlugin } from 'nuxt/app'
 import { useBrowserDetect } from '../composables/browser'
 
 export default defineNuxtPlugin(nuxtApp => {

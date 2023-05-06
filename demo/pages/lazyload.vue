@@ -1,5 +1,6 @@
 <template>
+    <p>Lazyloader with in-view scroll detection</p>
     <util-lazy-image
-        src="https://images.prismic.io/meijering/bafe5c3e-f711-4f54-a3b2-e79925058458_zonnepanelen-op-dak.png?auto=compress,format&rect=0,0,810,810&w=1080&h=1080"
+        src="https://cfl.dropboxstatic.com/static/images/logo_catalog/blue_dropbox_glyph_m1-vflZvZxbS.png"
     />
 </template>

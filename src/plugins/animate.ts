@@ -25,7 +25,7 @@ const toStrategies = {
 }
 
 export default defineNuxtPlugin(nuxtApp => {
-    nuxtApp.vueApp.directive('animation', {
+    nuxtApp.vueApp.directive('animate', {
         mounted(el, { value }: { value: AnimationTypes }) {
             const intersection = new Intersect(el, 0)
             setStrategies[value](el)

@@ -19,7 +19,8 @@ interface BrowserPlugin {
 
 declare module "@vue/runtime-core" {
 	export interface ComponentCustomProperties {
-		$breakpoint: BreakpointPlugin;
+		$window: Window;
 		$browser: BrowserPlugin;
+		$breakpoint: BreakpointPlugin;
 	}
 }
