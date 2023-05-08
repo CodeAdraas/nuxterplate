@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { PrismicRichText } from '@prismicio/vue'
-import FaqQa from '../faq-qa/component.vue'
+import FaqQa from './qa.vue'
 
 interface Props {
     title?: any
@@ -27,11 +27,7 @@ const changePointer = (newIndex: number) => {
 </script>
 
 <template>
-    <div
-        :style="{
-            '--faq-spacing': '30px'
-        }"
-    >
+    <div class="faq">
         <prismic-rich-text
             v-if="title"
             :field="title"
@@ -55,6 +51,6 @@ const changePointer = (newIndex: number) => {
 
 <style>
 .faq--title {
-    padding-bottom: var(--faq-spacing);
+    padding-bottom: var(--faq-spacing-y, 1em);
 }
 </style>

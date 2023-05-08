@@ -1,14 +1,8 @@
 <template>
     <header>
         Header
-        <router-link
-            v-if="$route.path !== '/'"
-            style="display:block;margin-bottom: 2rem;"
-            to="/"
-        >
-            Back
-        </router-link>
-        <nav v-else>
+        <nav>
+            <router-link to="/" style="display: block;">Home</router-link>
             <router-link to="/breakpoint" style="display: block;">Breakpoint</router-link>
             <router-link to="/local-storage" style="display: block;">Local storage</router-link>
             <router-link to="/browser" style="display: block;">Browser detect</router-link>
@@ -19,6 +13,21 @@
             <router-link to="/faq" style="display: block;">FAQ</router-link>
             <router-link to="/cms" style="display: block;">CMS</router-link>
             <router-link to="/credit" style="display: block;">Credit</router-link>
+            <router-link to="/form" style="display: block;">Form</router-link>
+            <router-link to="/fimbox" style="display: block;">Fimbox</router-link>
         </nav>
     </header>
 </template>
+
+<style scoped>
+header {
+    margin-bottom: 50px;
+}
+nav {
+    display: flex;
+    gap: 10px;
+}
+.router-link-active {
+    color: green;
+}
+</style>

@@ -1,7 +1,14 @@
 <template>
-    <util-layout>
+    <base-layout :global-turnstile="false">
         <main>
-           <slot />
+            <slot />
         </main>
-    </util-layout>
+    </base-layout>
 </template>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+</style>

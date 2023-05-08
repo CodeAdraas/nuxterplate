@@ -3,7 +3,9 @@ export default defineNuxtConfig({
 
     runtimeConfig: {
         public: {
-            creditTheme: 'blue'
+            devCreditTheme: 'invisible',
+            turnstileSitekey: process.env.TURNSTILE_SITEKEY,
+            fimboxAPIUrl: process.env.FIMBOX_API_URL
         }
     },
 

@@ -4,50 +4,24 @@ import {
     addComponent,
     addImportsDir,
     addPlugin,
-    type Resolver
 } from '@nuxt/kit'
 
 const components = [
-    (resolver: Resolver) => ({
-        name: 'Icon',
-        filePath: resolver.resolve('components/icon/component.vue')
-    }),
-    (resolver: Resolver) => ({
-        name: 'UtilLazyImage',
-        filePath: resolver.resolve('components/util-lazy-image/component.vue')
-    }),
-    (resolver: Resolver) => ({
-        name: 'UtilScrollTextRevealLines',
-        filePath: resolver.resolve('components/util-scroll/text/reveal-lines.vue')
-    }),
-    (resolver: Resolver) => ({
-        name: 'UtilScrollTextRevealWords',
-        filePath: resolver.resolve('components/util-scroll/text/reveal-words.vue')
-    }),
-    (resolver: Resolver) => ({
-        name: 'UtilScrollTextRevealLetters',
-        filePath: resolver.resolve('components/util-scroll/text/reveal-letters.vue')
-    }),
-    (resolver: Resolver) => ({
-        name: 'UtilSlider',
-        filePath: resolver.resolve('components/util-slider/component.vue')
-    }),
-    (resolver: Resolver) => ({
-        name: 'CfTurnstile',
-        filePath: resolver.resolve('components/cf-turnstile/component.vue')
-    }),
-    (resolver: Resolver) => ({
-        name: 'Faq',
-        filePath: resolver.resolve('components/faq/component.vue')
-    }),
-    (resolver: Resolver) => ({
-        name: 'AchmCredit',
-        filePath: resolver.resolve('components/achm-credit/component.vue')
-    }),
-    (resolver: Resolver) => ({
-        name: 'UtilLayout',
-        filePath: resolver.resolve('components/util-layout/component.vue')
-    })
+    ['Icon', './components/icon/component.vue'],
+    ['UtilLazyImage', './components/util-lazy-image/component.vue'],
+    ['UtilScrollTextRevealLines', './components/util-scroll/text/reveal-lines.vue'],
+    ['UtilScrollTextRevealWords', './components/util-scroll/text/reveal-words.vue'],
+    ['UtilScrollTextRevealLetters', './components/util-scroll/text/reveal-letters.vue'],
+    ['UtilSlider', './components/util-slider/component.vue'],
+    ['CfTurnstile', './components/cf-turnstile/component.vue'],
+    ['CfTurnstileGlobal', './components/cf-turnstile-global/component.vue'],
+    ['Faq', './components/faq/component.vue'],
+    ['DevCredit', './components/dev-credit/component.vue'],
+    ['BaseLayout', './components/base-layout/component.vue'],
+    ['Form', './components/form/component.vue'],
+    ['FormInput', './components/form/input.vue'],
+    ['FormMultiSelect', './components/form/multi-select.vue'],
+    ['FimboxForm', './components/fimbox-form/component.vue'],
 ]
 
 export default defineNuxtModule({
@@ -64,7 +38,10 @@ export default defineNuxtModule({
         nuxt.options.css.push(resolver.resolve('assets/breakpoint.css'))
         nuxt.options.css.push(resolver.resolve('assets/cms.css'))
 
-        for (let opt of components) addComponent(opt(resolver))
+        for (let [name, filePath] of components) addComponent({
+            name,
+            filePath: resolver.resolve(filePath)
+        })
 
         addImportsDir(resolver.resolve('composables'))
 

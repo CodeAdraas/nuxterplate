@@ -15,10 +15,10 @@ ul.cms > li::before {
     height: var(--cms-li-bullet-size, 0.5em);
     width: var(--cms-li-bullet-size, 0.5em);
     /** This file should be present in the /public folder of your Nuxt project **/
-    background-image: var(--cms-li-bullet-url, url('/bullet.png'));
+    background-image: var(--cms-li-bullet-url, url('./bullet.png'));
     background-size: contain;
     background-position: center;
     position: absolute;
     left: var(--cms-li-left, -0.8em);
-    font-size: var(--cms-li-font-size, 1.1em);
+    font-size: var(--cms-li-font-size, 1em);
 }
