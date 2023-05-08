@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount } from 'vue'
+import { useTurnstile } from '../../composables/turnstile';
 
 type Appearance = 'always' | 'execute' | 'interaction-only'
 type Theme = 'auto' | 'light' | 'dark'
@@ -25,7 +26,7 @@ const prop = withDefaults(defineProps<Props>(), {
 })
 const emit = defineEmits<Emits>()
 
-function renderTurnstile() {
+const renderTurnstile = () => {
     // @ts-ignore
     window.onloadTurnstileCallback = () => {
         // @ts-ignore
@@ -35,8 +36,8 @@ function renderTurnstile() {
             'theme': prop.theme,
             'language': prop.lang,
             'callback': (token: string) => emit('verify', token),
-            'expired-callback': emit('expire'),
-            'error-callback': emit('fail')
+            'expired-callback': () => emit('expire'),
+            'error-callback': () => emit('fail')
         })
     }
 }
@@ -54,7 +55,12 @@ onMounted(() => {
 })
 
 // @ts-ignore
-onBeforeUnmount(() => delete window.turnstile)
+onBeforeUnmount(() => {
+    if (! useTurnstile().useGlobal) {
+        // @ts-ignore
+        delete window.turnstile
+    }
+})
 </script>
 
 <template>
