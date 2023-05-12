@@ -1,7 +1,7 @@
 <template>
     <header>
         Header
-        <nav>
+        <nav :class="['flex', {'is-mobile': $breakpoint.between('xs', 'md')}]">
             <router-link to="/" style="display: block;">Home</router-link>
             <router-link to="/breakpoint" style="display: block;">Breakpoint</router-link>
             <router-link to="/local-storage" style="display: block;">Local storage</router-link>
@@ -9,7 +9,7 @@
             <router-link to="/lazyload" style="display: block;">Lazyload</router-link>
             <router-link to="/scroll" style="display: block;">Scroll</router-link>
             <router-link to="/slider" style="display: block;">Swiper slider</router-link>
-            <router-link to="/turnstile" style="display: block;">Cf Turnstile</router-link>
+            <router-link to="/captcha" style="display: block;">Captcha</router-link>
             <router-link to="/faq" style="display: block;">FAQ</router-link>
             <router-link to="/cms" style="display: block;">CMS</router-link>
             <router-link to="/credit" style="display: block;">Credit</router-link>
@@ -19,13 +19,18 @@
     </header>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 header {
     margin-bottom: 50px;
 }
 nav {
-    display: flex;
-    gap: 10px;
+    &.flex {
+        display: flex;
+        gap: 10px;
+    }
+    &.is-mobile {
+        flex-direction: column;
+    }
 }
 .router-link-active {
     color: green;

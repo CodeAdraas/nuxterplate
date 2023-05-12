@@ -1,5 +1,5 @@
 import { defineNuxtPlugin } from 'nuxt/app'
-import { useBreakpoint, between, is } from '../composables/breakpoint'
+import { useBreakpoint, is, between } from '../composables/breakpoint'
 
 export default defineNuxtPlugin(nuxtApp => {
     const breakpoint = useBreakpoint()

@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useRuntimeConfig } from 'nuxt/app'
+
 interface Props {
     height?: number,
-    theme:
+    theme?:
         | 'default'
         | 'volcano'
         | 'invisible'
@@ -11,7 +14,11 @@ interface Props {
         | 'gray'
 }
 
-defineProps<Props>()
+const prop = defineProps<Props>()
+const theme_ = computed(
+    () => prop.theme
+       || useRuntimeConfig().public?.creditTheme
+       || 'default')
 </script>
 
 <template>
@@ -20,7 +27,7 @@ defineProps<Props>()
         :height="`${height || 60}px`"
         width="100%"
         frameborder="0"
-        :src="`https://credit.achoendov.media?theme=${theme}`"
+        :src="`https://credit.achoendov.media?theme=${theme_}`"
         loading="lazy"
     />
 </template>

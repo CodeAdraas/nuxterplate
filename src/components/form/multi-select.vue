@@ -23,6 +23,7 @@ const value = computed(() => {
     }
     return labels.join(', ')
 })
+
 const errorHelp = ref()
 
 const onClick = (optionLabel: string) => {

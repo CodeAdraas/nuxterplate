@@ -8,13 +8,13 @@ export class Fimbox implements IFimbox {
         this.baseUrl = baseUrl
     }
 
-    async send(turnstileToken: string, data: Record<string, any>) {
+    async send(captchaToken: string, data: Record<string, any>) {
         try {
             await $fetch(`${this.baseUrl.replace(/\/$/, '')}/send`, {
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
                 body: {
-                    token: turnstileToken,
+                    token: captchaToken,
                     data
                 },
                 retry: 3

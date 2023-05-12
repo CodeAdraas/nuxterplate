@@ -34,11 +34,13 @@ let isListeningForResize = false
 /**
  * Reads the current breakpoint from the document's body psuedo CSS value
  */
-export const getBreakpoint = () => process.server
+// @ts-ignore
+export const getBreakpoint = () => !process.client
     ? 'xs'
     : window.getComputedStyle(document.body, '::before').content.replace(/\"/g, '')
 
-const ww = ref(process.server
+// @ts-ignore
+const ww = ref(!process.client
     ? 0
     : window.innerWidth)
 
@@ -48,8 +50,7 @@ export const currentBreakpoint = ref(getBreakpoint()) as Ref<Breakpoint>
  * Checks wheter the current window is past given breakpoint but not exceeding the next one
  */
 export const is = (assertion: Breakpoint) => {
-    if (process.server) return false
-
+    if (!process.client) return false
     return assertion === currentBreakpoint.value
 }
 
@@ -60,17 +61,12 @@ export const between = (
     assertion: Breakpoint | null,
     assertion2: Breakpoint | null
 ) => {
-    if (process.server) return false
+    if (!process.client) return false
 
-    if (ww.value == 0) {
-        ww.value = window.innerWidth
-    }
+    let min = assertion ? BreakpointWidths[assertion]: 0,
+        max = assertion2 ? BreakpointWidths[assertion2] : Infinity
 
-    let x = ww.value
-    let bp1 = assertion ? BreakpointWidths[assertion]: 0,
-        bp2 = assertion2 ? BreakpointWidths[assertion2] : Infinity
-
-    return x >= bp1 && x < bp2
+    return ww.value >= min && ww.value < max
 }
 
 /**

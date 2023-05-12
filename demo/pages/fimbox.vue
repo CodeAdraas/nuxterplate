@@ -1,11 +1,13 @@
 <template>
-    <fimbox-form
+    <form-fimbox
         submit-label="Submit"
         loading-label="Loading..."
+        :captcha="{
+            sitekey: '1x00000000000000000000AA',
+            errorMessage: 'Error: captcha'
+        }"
         success-message="Gelukt, bedankt voor je verzoek. We komen zo spoedig mogelijk bij u terug."
-        turnstile-sitekey="1x00000000000000000000AA"
-        turnstile-error-message="Error: captcha"
-        fimbox-api-url=""
+        fimbox-url="http://localhost:8080"
     >
         <form-input
             label="Your name"
@@ -28,5 +30,5 @@
             variant="textarea"
             :max="300"
         />
-    </fimbox-form>
+    </form-fimbox>
 </template>

@@ -1,16 +1,21 @@
+import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
     extends: ['nuxt-seo-kit'],
 
     runtimeConfig: {
         public: {
-            devCreditTheme: 'invisible',
-            turnstileSitekey: process.env.TURNSTILE_SITEKEY,
-            fimboxAPIUrl: process.env.FIMBOX_API_URL
+            creditTheme: 'invisible',
+            captcha: {
+                sitekey: '1x00000000000000000000AA'
+            },
+            fimbox: {
+                url: 'http://localhost:8080'
+            }
         }
     },
 
     modules: [
-        '~/../src/module'
+        '~/../src/module',
     ],
 
     ssr: true,

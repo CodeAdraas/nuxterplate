@@ -3,10 +3,10 @@ import SplitType  from 'split-type'
 
 
 export interface SplitTypeLogic {
-  /**
-   * Text splitting callable.
-   */
-  split: ((options?: any) => SplitType)
+    /**
+     * Text splitting callable.
+     */
+    split: ((options?: any) => SplitType)
 }
 
 /**
@@ -18,12 +18,12 @@ export interface SplitTypeLogic {
  * @returns SplitTypeLogic
  */
 export const useSplitType = <T extends HTMLElement>(
-  templateRef: Ref<T>
+    templateRef: Ref<T>
 ): SplitTypeLogic => {
-  const logic = {
-    split: (options?: any) => {
-      return new SplitType(templateRef.value, options)
+    const logic = {
+        split: (options?: any) => {
+            return new SplitType(templateRef.value, options)
+        }
     }
-  }
-  return logic
+    return logic
 }

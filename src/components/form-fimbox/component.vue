@@ -1,32 +1,31 @@
 <script setup lang="ts">
 import { ref, watch, onBeforeUnmount } from 'vue'
-import { useFimbox } from '../../composables/fimbox'
 import { useRuntimeConfig } from 'nuxt/app'
-import { useTurnstile } from '../../composables/turnstile'
+import { useFimbox } from '../../composables/fimbox'
+import { useCaptcha } from '../../composables/captcha'
 import Form from '../form/component.vue'
-import CfTurnstile from '../cf-turnstile/component.vue'
+import Captcha from '../captcha/component.vue'
 
 interface Props {
     submitLabel: string
     loadingLabel: string
     successMessage: string
-    turnstileErrorMessage: string
-    turnstileSitekey?: string
-    turnstileAppearance?: 'always' | 'execute' | 'interaction-only'
-    turnstileTheme?: 'auto' | 'light' | 'dark'
-    turnstileLang?: 'auto' | 'en' | 'de' | 'nl'
-    fimboxApiUrl?: string
+    captcha: {
+        errorMessage: string
+        sitekey?: string
+        appearance?: 'always' | 'execute' | 'interaction-only'
+        theme?: 'auto' | 'light' | 'dark'
+        lang?: 'auto' | 'en' | 'de' | 'nl'
+    }
+    fimboxUrl?: string
 }
 
 const prop = defineProps<Props>()
-
 const runtimeConfig = useRuntimeConfig()
-const turnstile = useTurnstile()
-const fimbox = useFimbox(
-    prop.fimboxApiUrl || runtimeConfig.public.fimboxAPIUrl
-)
+const globalCaptcha = useCaptcha()
+const fimbox = useFimbox(prop.fimboxUrl || runtimeConfig.public.fimbox.url)
 
-const turnstileToken = ref()
+const captchaToken = ref()
 const formValidityMessage = ref()
 const isLoading = ref(true)
 const isError = ref(false)
@@ -35,19 +34,22 @@ const onSubmit = (formData: FormData) => {
     isLoading.value = true
     formValidityMessage.value = undefined
 
-    fimbox.send(turnstileToken.value, Object.fromEntries(formData.entries()))
+    fimbox.send(
+        captchaToken.value,
+        Object.fromEntries(formData.entries())
+    )
     .then(() => setSuccessMessage(prop.successMessage))
     .catch(error => setErrorMessage(error))
     .finally(() => isLoading.value = false)
 }
 
 const onTurnstileVerified = (token: string) => {
-    turnstileToken.value = token
+    captchaToken.value = token
 }
 
 const onTurnstileError = () => {
     isLoading.value = false
-    setErrorMessage(prop.turnstileErrorMessage)
+    setErrorMessage(prop.captcha.errorMessage)
 }
 
 const setSuccessMessage = (message: string) => {
@@ -60,21 +62,25 @@ const setErrorMessage = (message: string) => {
     isError.value = true
 }
 
-const stopWatchGlobalTurnstile = watch(
-    () => turnstile.responseToken,
-    (token) => token && onTurnstileVerified(token), {
+const stopWatchCaptchaToken = watch(
+    captchaToken,
+    (token) => {
+        if (token) isLoading.value = false
+    }
+)
+
+const stopWatchGlobalCaptchaToken = watch(
+    () => globalCaptcha.responseToken,
+    (token) => {
+        if (token) onTurnstileVerified(token)
+    }, {
         immediate: true
     }
 )
 
-const stopWatchTurnstile = watch(
-    turnstileToken,
-    (token) => token && (isLoading.value = false)
-)
-
 onBeforeUnmount(() => {
-    stopWatchGlobalTurnstile()
-    stopWatchTurnstile()
+    stopWatchCaptchaToken()
+    stopWatchGlobalCaptchaToken()
 })
 </script>
 
@@ -89,12 +95,12 @@ onBeforeUnmount(() => {
         <slot />
         <!--  -->
         <template #captcha>
-            <cf-turnstile
-                v-if="!turnstile.useGlobal && turnstileSitekey"
-                :sitekey="turnstileSitekey"
-                :appearance="turnstileAppearance"
-                :theme="turnstileTheme"
-                :lang="turnstileLang"
+            <captcha
+                v-if="!globalCaptcha.responseToken && globalCaptcha.isVerifying"
+                :sitekey="captcha.sitekey"
+                :appearance="captcha.appearance"
+                :theme="captcha.theme"
+                :lang="captcha.lang"
                 @verify="onTurnstileVerified"
                 @expire="onTurnstileError"
                 @fail="onTurnstileError"

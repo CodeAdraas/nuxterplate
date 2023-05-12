@@ -19,17 +19,17 @@ const emit = defineEmits<Emits>()
 const lazyload = useLazyLoad()
 const img = ref()
 const reactiveSrc = computed(() => prop.src)
-const stopwatchingSrc = watch(reactiveSrc, () => initLazyload())
+const stopwatchingSource = watch(reactiveSrc, () => initLazyload())
 const initLazyload = useDebounce(() => {
     if (img.value.hasAttribute('data-ll-status')) {
         img.value.removeAttribute('data-ll-status')
     }
     lazyload.update()
     lazyload.loaded(img.value, () => emit('loaded'))
-}, 100)
+}, 10)
 
 onMounted(() => initLazyload())
-onBeforeUnmount(() => stopwatchingSrc())
+onBeforeUnmount(() => stopwatchingSource())
 </script>
 
 <template>

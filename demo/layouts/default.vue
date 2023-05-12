@@ -1,9 +1,9 @@
 <template>
-    <base-layout :global-turnstile="false">
+    <layout-default :global-captcha="true">
         <main>
             <slot />
         </main>
-    </base-layout>
+    </layout-default>
 </template>
 
 <style>

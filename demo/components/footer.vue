@@ -1,7 +1,7 @@
 <template>
     <footer>
         Footer
-        <turnstile-status />
+        <global-captcha-status />
     </footer>
 </template>
 

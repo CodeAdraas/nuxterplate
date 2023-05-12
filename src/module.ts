@@ -13,15 +13,14 @@ const components = [
     ['UtilScrollTextRevealWords', './components/util-scroll/text/reveal-words.vue'],
     ['UtilScrollTextRevealLetters', './components/util-scroll/text/reveal-letters.vue'],
     ['UtilSlider', './components/util-slider/component.vue'],
-    ['CfTurnstile', './components/cf-turnstile/component.vue'],
-    ['CfTurnstileGlobal', './components/cf-turnstile-global/component.vue'],
+    ['Captcha', './components/captcha/component.vue'],
     ['Faq', './components/faq/component.vue'],
     ['DevCredit', './components/dev-credit/component.vue'],
-    ['BaseLayout', './components/base-layout/component.vue'],
+    ['LayoutDefault', './components/layout-default/component.vue'],
     ['Form', './components/form/component.vue'],
     ['FormInput', './components/form/input.vue'],
     ['FormMultiSelect', './components/form/multi-select.vue'],
-    ['FimboxForm', './components/fimbox-form/component.vue'],
+    ['FormFimbox', './components/form-fimbox/component.vue'],
 ]
 
 export default defineNuxtModule({
