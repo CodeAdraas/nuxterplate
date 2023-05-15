@@ -4,6 +4,7 @@
         loading-label="Loading..."
         :captcha="{
             sitekey: '1x00000000000000000000AA',
+            appearance: 'interaction-only',
             errorMessage: 'Error: captcha'
         }"
         success-message="Gelukt, bedankt voor je verzoek. We komen zo spoedig mogelijk bij u terug."

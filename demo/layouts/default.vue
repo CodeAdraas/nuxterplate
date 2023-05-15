@@ -1,5 +1,5 @@
 <template>
-    <layout-default :global-captcha="true">
+    <layout-default :global-captcha="false">
         <main>
             <slot />
         </main>

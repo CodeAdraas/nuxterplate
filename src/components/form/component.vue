@@ -32,11 +32,11 @@ const onSubmit = (evt: any) => {
     >
         <slot />
         <!--  -->
-        <div class="captcha">
+        <div class="slot">
             <slot name="captcha" />
         </div>
         <!--  -->
-        <div :class="['validity-message', {'error': isError}]">
+        <div :class="['slot validity-message', {'error': isError}]">
             <slot name="validityMessage" />
         </div>
         <!--  -->
@@ -58,7 +58,7 @@ const onSubmit = (evt: any) => {
     gap: var(--form-gap-y, 1.5em) 0;
     &--btn {
         font-size: inherit;
-        border: 1px solid var(--form-btn-color, #fff);
+        border: 1px solid var(--form-button-border-color, #fff);
         border-radius: var(--form-border-radius, 0.5em);
         color: var(--form-button-color, #fff);
         background: var(--form-button-bg-color, #000);
@@ -72,5 +72,9 @@ const onSubmit = (evt: any) => {
     &.error {
         color: var(--form-valid-invalid, red);
     }
+}
+
+.slot:empty {
+  display: none;
 }
 </style>
