@@ -45,7 +45,7 @@ const onInvalid = (evt) => {
 <template>
     <div class="form--multi-select">
         <div class="field">
-            <label class="text-gray">{{ label }}</label>
+            <label>{{ label }}</label>
             <multi-select-option
                 v-for="checked, label, index in selectOptions"
                 :key="index"

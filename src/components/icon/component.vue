@@ -10,7 +10,8 @@ try {
 catch {
     throw createError({
         statusCode: 404,
-        statusMessage: 'Icon template file not found'
+        statusMessage: 'Icon template file not found',
+        fatal: true
     })
 }
 

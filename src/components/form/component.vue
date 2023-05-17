@@ -70,7 +70,7 @@ const onSubmit = (evt: any) => {
 .validity-message {
     color: var(--form-valid-color, green);
     &.error {
-        color: var(--form-valid-invalid, red);
+        color: var(--form-invalid-color, red);
     }
 }
 </style>
