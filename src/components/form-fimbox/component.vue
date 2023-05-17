@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, onBeforeUnmount } from 'vue'
 import { useRuntimeConfig } from 'nuxt/app'
 import { useFimbox } from '../../composables/fimbox'
 import { useCaptcha } from '../../composables/captcha'
@@ -96,7 +96,8 @@ onBeforeUnmount(() => {
         <!--  -->
         <template #captcha>
             <captcha
-                v-if="!globalCaptcha.responseToken && globalCaptcha.isVerifying"
+                v-if="!globalCaptcha.responseToken &&
+                      !globalCaptcha.isVerifying"
                 :sitekey="captcha.sitekey"
                 :appearance="captcha.appearance"
                 :theme="captcha.theme"
