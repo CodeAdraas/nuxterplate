@@ -21,7 +21,7 @@ export class Fimbox implements IFimbox {
             })
         } catch(e: any) {
             if ('undefined' === typeof e.statusCode || e.statusCode !== 401) {
-                throw new Error('Er ging iets fout, probeer het later nog eens of neem contact met ons op via e-mail.')
+                throw new Error
             }
             throw new Error(e.data.detail)
         }

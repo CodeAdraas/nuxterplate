@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, onBeforeUnmount } from 'vue'
+import { ref, watch, onBeforeUnmount } from 'vue'
 import { useRuntimeConfig } from 'nuxt/app'
 import { useFimbox } from '../../composables/fimbox'
 import { useCaptcha } from '../../composables/captcha'
@@ -9,6 +9,7 @@ import Captcha from '../captcha/component.vue'
 interface Props {
     submitLabel: string
     loadingLabel: string
+    errorMessage: string
     successMessage: string
     captcha: {
         errorMessage: string
@@ -39,7 +40,9 @@ const onSubmit = (formData: FormData) => {
         Object.fromEntries(formData.entries())
     )
     .then(() => setSuccessMessage(prop.successMessage))
-    .catch(error => setErrorMessage(error))
+    .catch(error => {
+        setErrorMessage(error ? error : prop.errorMessage)
+    })
     .finally(() => isLoading.value = false)
 }
 
