@@ -13,14 +13,12 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-    <!-- SEO -->
     <seo-kit />
-    <!-- User interface -->
     <Header />
     <slot />
-    <Footer />
-    <!-- Invisible global captcha -->
-    <captcha v-if="globalCaptcha" global /> 
-    <!-- Developer credit -->
-    <dev-credit v-if="credits" />
+    <client-only>
+        <Footer />
+        <captcha v-if="globalCaptcha" global /> 
+        <dev-credit v-if="credits" />
+    </client-only>
 </template>
