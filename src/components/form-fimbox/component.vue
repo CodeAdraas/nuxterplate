@@ -40,8 +40,8 @@ const onSubmit = (formData: FormData) => {
         Object.fromEntries(formData.entries())
     )
     .then(() => setSuccessMessage(prop.successMessage))
-    .catch(error => {
-        setErrorMessage(error ? error : prop.errorMessage)
+    .catch(err => {
+        setErrorMessage(err?.message ? err.message : prop.errorMessage)
     })
     .finally(() => isLoading.value = false)
 }
