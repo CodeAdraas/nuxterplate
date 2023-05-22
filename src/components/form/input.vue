@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 
 interface Props {
     label: string
-    type?: 'text' | 'number' | 'email'
+    type?: 'text' | 'number' | 'email' | 'tel'
     variant?: 'input' | 'textarea'
     required?: boolean
     min?: number
