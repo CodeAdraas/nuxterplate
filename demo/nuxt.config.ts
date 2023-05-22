@@ -6,6 +6,7 @@ export default defineNuxtConfig({
         public: {
             creditTheme: 'invisible',
             captcha: {
+                global: true,
                 sitekey: '1x00000000000000000000AA'
             },
             fimbox: {

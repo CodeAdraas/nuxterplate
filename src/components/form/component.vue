@@ -8,7 +8,7 @@ interface Emits {
 interface Props {
     submitLabel: string
     loadingLabel: string
-    loading?: boolean
+    isLoading?: boolean
     isError?: boolean
 }
 
@@ -43,9 +43,9 @@ const onSubmit = (evt: any) => {
         <button
             type="submit"
             class="form--btn"
-            :disabled="loading"
+            :disabled="isLoading"
         >
-            {{ loading ? loadingLabel : submitLabel }}
+            {{ isLoading ? loadingLabel : submitLabel }}
         </button>
     </form>
 </template>

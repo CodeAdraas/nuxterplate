@@ -4,13 +4,15 @@ import { useRuntimeConfig } from 'nuxt/app'
 import { useCaptcha } from '../../../composables/captcha'
 import CfTurnstile from './component.vue'
 
-const captcha = useCaptcha()
 const runtimeConfig = useRuntimeConfig()
+const captcha = useCaptcha()
+
 const onVerify = (token: string) => {
     captcha.isVerifying = false
     captcha.isError = false
     captcha.responseToken = token
 }
+
 const onInvalid = () => {
     captcha.isVerifying = false
     captcha.isError = true
@@ -21,6 +23,7 @@ onMounted(() => {
     captcha.isVerifying = true
     captcha.isError = false
 })
+
 onBeforeUnmount(() => {
     captcha.isVerifying = true
     captcha.isError = false

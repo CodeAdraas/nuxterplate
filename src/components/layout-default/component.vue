@@ -1,15 +1,17 @@
 <script setup lang="ts">
+import { useRuntimeConfig } from 'nuxt/app'
 import Captcha from '../captcha/component.vue'
 import DevCredit from '../dev-credit/component.vue'
 
 interface Props {
-    globalCaptcha?: boolean
     credits?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
     credits: true
 })
+
+const runtimeConfig = useRuntimeConfig()
 </script>
 
 <template>
@@ -18,7 +20,10 @@ withDefaults(defineProps<Props>(), {
     <slot />
     <client-only>
         <Footer />
-        <captcha v-if="globalCaptcha" global /> 
+        <captcha
+            v-if="runtimeConfig.public.captcha?.global"
+            global
+        />
         <dev-credit v-if="credits" />
     </client-only>
 </template>

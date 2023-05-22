@@ -27,63 +27,49 @@ const globalCaptcha = useCaptcha()
 const fimbox = useFimbox(prop.fimboxUrl || runtimeConfig.public.fimbox.url)
 
 const captchaToken = ref()
-const formValidityMessage = ref()
-const isLoading = ref(true)
+const validityMessage = ref()
+const isLoading = ref(false)
+const isCaptchaLoading = ref(true)
 const isError = ref(false)
+const isGlobalCaptcha = ref(runtimeConfig.public.captcha?.global || false)
 
-const onSubmit = (formData: FormData) => {
-    isLoading.value = true
-    formValidityMessage.value = undefined
-
-    fimbox.send(
-        captchaToken.value,
-        Object.fromEntries(formData.entries())
-    )
-    .then(() => setSuccessMessage(prop.successMessage))
-    .catch(err => {
-        setErrorMessage(err?.message ? err.message : prop.errorMessage)
-    })
-    .finally(() => isLoading.value = false)
-}
-
-const onTurnstileVerified = (token: string) => {
-    captchaToken.value = token
-}
-
-const onTurnstileError = () => {
-    isLoading.value = false
-    setErrorMessage(prop.captcha.errorMessage)
-}
+const onCaptchaError = () => setErrorMessage(prop.captcha.errorMessage)
 
 const setSuccessMessage = (message: string) => {
-    formValidityMessage.value = message
     isError.value = false
+    validityMessage.value = message
 }
 
 const setErrorMessage = (message: string) => {
-    formValidityMessage.value = message
     isError.value = true
+    validityMessage.value = message
 }
 
-const stopWatchCaptchaToken = watch(
-    captchaToken,
-    (token) => {
-        if (token) isLoading.value = false
-    }
-)
+const onSubmit = (formData: FormData) => {
+    isLoading.value = true
+    validityMessage.value = undefined
+
+    fimbox.send(captchaToken.value, Object.fromEntries(formData.entries()))
+        .then(() => setSuccessMessage(prop.successMessage))
+        .catch(err => setErrorMessage(err?.message ? err.message : prop.errorMessage))
+        .finally(() => isLoading.value = false)
+}
 
 const stopWatchGlobalCaptchaToken = watch(
     () => globalCaptcha.responseToken,
-    (token) => {
-        if (token) onTurnstileVerified(token)
-    }, {
-        immediate: true
-    }
+    (token) => captchaToken.value = token,
+    { immediate: true }
+)
+
+const stopWatchCaptchaToken = watch(
+    captchaToken,
+    (token) => isCaptchaLoading.value = token ? false : true,
+    { immediate: true }
 )
 
 onBeforeUnmount(() => {
-    stopWatchCaptchaToken()
     stopWatchGlobalCaptchaToken()
+    stopWatchCaptchaToken()
 })
 </script>
 
@@ -91,7 +77,7 @@ onBeforeUnmount(() => {
     <Form
         :submit-label="submitLabel"
         :loading-label="loadingLabel"
-        :loading="isLoading"
+        :is-loading="isLoading || isCaptchaLoading"
         :is-error="isError"
         @submit="onSubmit"
     >
@@ -99,21 +85,21 @@ onBeforeUnmount(() => {
         <!--  -->
         <template #captcha>
             <captcha
-                v-if="!globalCaptcha.responseToken &&
-                      !globalCaptcha.isVerifying"
+                v-if="!isGlobalCaptcha"
                 :sitekey="captcha.sitekey"
                 :appearance="captcha.appearance"
                 :theme="captcha.theme"
                 :lang="captcha.lang"
-                @verify="onTurnstileVerified"
-                @expire="onTurnstileError"
-                @fail="onTurnstileError"
+                field-name="token"
+                v-model="captchaToken"
+                @expire="onCaptchaError"
+                @fail="onCaptchaError"
             />
         </template>
         <!--  -->
         <template #validityMessage>
-            <span v-if="formValidityMessage">
-                {{ formValidityMessage }}
+            <span v-if="validityMessage">
+                {{ validityMessage }}
             </span>
         </template>
     </Form>

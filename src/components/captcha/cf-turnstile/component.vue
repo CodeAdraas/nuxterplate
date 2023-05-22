@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount } from 'vue'
 import { createError } from 'nuxt/app';
 
 type Appearance =
@@ -17,6 +17,7 @@ type Language =
     | 'nl'
 
 interface Emits {
+    (e: 'update:modelValue', token?: string): void
     (e: 'verify', token: string): void
     (e: 'expire'): void
     (e: 'fail'): void
@@ -26,14 +27,16 @@ interface Props {
     sitekey: string
     appearance?: Appearance,
     theme?: Theme,
-    lang?: Language
+    lang?: Language,
+    formFieldName? : string
 }
 
 const emit = defineEmits<Emits>()
 const prop = withDefaults(defineProps<Props>(), {
     appearance: 'always',
     theme: 'auto',
-    lang: 'auto'
+    lang: 'auto',
+    formFieldName: 'cf-turnstile-response'
 })
 
 const widgetId = `#turnstile-widget`
@@ -46,9 +49,19 @@ const renderTurnstile = () => {
         'appearance': prop.appearance,
         'theme': prop.theme,
         'language': prop.lang,
-        'callback': (token: string) => emit('verify', token),
-        'expired-callback': () => emit('expire'),
-        'error-callback': () => emit('fail')
+        'response-field-name': prop.formFieldName,
+        'callback': (token: string) => {
+            emit('update:modelValue', token)
+            emit('verify', token)
+        },
+        'expired-callback': () => {
+            emit('update:modelValue', undefined)
+            emit('expire')
+        },
+        'error-callback': () => {
+            emit('update:modelValue', undefined)
+            emit('fail')
+        }
     })
 }
 

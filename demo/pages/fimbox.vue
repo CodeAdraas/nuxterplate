@@ -4,10 +4,11 @@
         loading-label="Loading..."
         :captcha="{
             sitekey: '1x00000000000000000000AA',
-            appearance: 'interaction-only',
+            appearance: 'always',
             errorMessage: 'Error: captcha'
         }"
         success-message="Gelukt, bedankt voor je verzoek. We komen zo spoedig mogelijk bij u terug."
+        error-message="Error error error"
         fimbox-url="http://localhost:8080"
     >
         <form-input

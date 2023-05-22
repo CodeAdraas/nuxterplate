@@ -25,10 +25,11 @@ interface Emits {
 
 interface Props {
     sitekey?: string
-    appearance?: Appearance,
-    theme?: Theme,
+    appearance?: Appearance
+    theme?: Theme
     lang?: Language
     global?: boolean
+    fieldName?: string
 }
 
 defineEmits<Emits>()
@@ -45,6 +46,7 @@ const runtimeConfig = useRuntimeConfig()
         :appearance="appearance"
         :theme="theme"
         :lang="lang"
+        :form-field-name="fieldName"
         @verify="token => $emit('verify', token)"
         @expire="$emit('expire')"
         @fail="$emit('fail')"
