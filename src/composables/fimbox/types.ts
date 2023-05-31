@@ -1,4 +1,10 @@
 export interface Fimbox {
     baseUrl: string
-    send(responseToken: string, data: Record<string, any>): Promise<void>
+    send(args: FimboxSendArgs): Promise<void>
+}
+
+export interface FimboxSendArgs {
+    captchaToken: string
+    tenantId: string
+    formData: Record<string, any>
 }

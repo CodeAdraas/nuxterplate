@@ -10,7 +10,8 @@ export default defineNuxtConfig({
                 sitekey: '1x00000000000000000000AA'
             },
             fimbox: {
-                url: 'http://localhost:8080'
+                url: process.env.FIMBOX_URL,
+                tenantId: process.env.FIMBOX_URL
             }
         }
     },

@@ -9,7 +9,6 @@
         }"
         success-message="Gelukt, bedankt voor je verzoek. We komen zo spoedig mogelijk bij u terug."
         error-message="Error error error"
-        fimbox-url="http://localhost:8080"
     >
         <form-input
             label="Your name"

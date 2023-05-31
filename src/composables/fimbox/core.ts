@@ -1,21 +1,24 @@
-import { Fimbox as IFimbox } from './types'
+import { Fimbox as IFimbox, FimboxSendArgs } from './types'
 import { $fetch } from 'ofetch' 
 
 export class Fimbox implements IFimbox {
-    baseUrl
+    baseUrl: string
 
     constructor(baseUrl: string) {
         this.baseUrl = baseUrl
     }
 
-    async send(captchaToken: string, data: Record<string, any>) {
+    async send(args: FimboxSendArgs) {
         try {
-            await $fetch(`${this.baseUrl.replace(/\/$/, '')}/send`, {
+            await $fetch(`${this.baseUrl.replace(/\/$/, '')}`, {
                 method: 'post',
-                headers: {'Content-Type': 'application/json'},
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Captcha-Token': args.captchaToken
+                },
                 body: {
-                    token: captchaToken,
-                    data
+                    tenantId: args.tenantId,
+                    formSubmissionData: args.formData
                 },
                 retry: 3
             })

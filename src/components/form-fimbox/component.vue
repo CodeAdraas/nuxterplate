@@ -49,7 +49,11 @@ const onSubmit = (formData: FormData) => {
     isLoading.value = true
     validityMessage.value = undefined
 
-    fimbox.send(captchaToken.value, Object.fromEntries(formData.entries()))
+    fimbox.send({
+        captchaToken: captchaToken.value,
+        tenantId: runtimeConfig.public.fimbox.tenantId,
+        formData: Object.fromEntries(formData.entries())
+    })
         .then(() => setSuccessMessage(prop.successMessage))
         .catch(err => setErrorMessage(err?.message ? err.message : prop.errorMessage))
         .finally(() => isLoading.value = false)
