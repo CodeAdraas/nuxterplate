@@ -67,7 +67,14 @@ const stopWatchGlobalCaptchaToken = watch(
 
 const stopWatchCaptchaToken = watch(
     captchaToken,
-    (token) => isCaptchaLoading.value = token ? false : true,
+    (token) => {
+        isCaptchaLoading.value = token ? false : true
+        // Remove captcha error
+        if (token && isError.value) {
+            isError.value = false
+            validityMessage.value = undefined
+        }
+    },
     { immediate: true }
 )
 
