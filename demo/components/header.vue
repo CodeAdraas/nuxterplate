@@ -14,7 +14,7 @@
             <router-link to="/cms" style="display: block;">CMS</router-link>
             <router-link to="/credit" style="display: block;">Credit</router-link>
             <router-link to="/form" style="display: block;">Form</router-link>
-            <router-link to="/fimbox" style="display: block;">Fimbox</router-link>
+            <router-link to="/formdrop" style="display: block;">FormDrop</router-link>
         </nav>
     </header>
 </template>

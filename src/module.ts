@@ -20,7 +20,7 @@ const components = [
     ['Form', './components/form/component.vue'],
     ['FormInput', './components/form/input.vue'],
     ['FormMultiSelect', './components/form/multi-select.vue'],
-    ['FormFimbox', './components/form-fimbox/component.vue'],
+    ['FormDrop', './components/form-drop/component.vue'],
 ]
 
 export default defineNuxtModule({

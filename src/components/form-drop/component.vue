@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, onBeforeUnmount } from 'vue'
 import { useRuntimeConfig } from 'nuxt/app'
-import { useFimbox } from '../../composables/fimbox'
+import { useFormDrop } from '../../composables/formdrop'
 import { useCaptcha } from '../../composables/captcha'
 import Form from '../form/component.vue'
 import Captcha from '../captcha/component.vue'
@@ -18,13 +18,16 @@ interface Props {
         theme?: 'auto' | 'light' | 'dark'
         lang?: 'auto' | 'en' | 'de' | 'nl'
     }
-    fimboxUrl?: string
+    formDrop: {
+        url?: string
+        formId?: string
+    }
 }
 
 const prop = defineProps<Props>()
 const runtimeConfig = useRuntimeConfig()
 const globalCaptcha = useCaptcha()
-const fimbox = useFimbox(prop.fimboxUrl || runtimeConfig.public.fimbox.url)
+const formDrop = useFormDrop(prop.formDrop?.url || runtimeConfig.public.formDrop.url)
 
 const captchaToken = ref()
 const validityMessage = ref()
@@ -49,10 +52,10 @@ const onSubmit = (formData: FormData) => {
     isLoading.value = true
     validityMessage.value = undefined
 
-    fimbox.send({
+    formDrop.send({
         captchaToken: captchaToken.value,
-        tenantId: runtimeConfig.public.fimbox.tenantId,
-        formData: Object.fromEntries(formData.entries())
+        formId: runtimeConfig.public.formDrop.formId,
+        data: Object.fromEntries(formData.entries())
     })
         .then(() => setSuccessMessage(prop.successMessage))
         .catch(err => setErrorMessage(err?.message ? err.message : prop.errorMessage))

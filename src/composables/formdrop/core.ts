@@ -1,14 +1,14 @@
-import { Fimbox as IFimbox, FimboxSendArgs } from './types'
+import { FormDrop as IFormDrop, FormDropSendArgs } from './types'
 import { $fetch } from 'ofetch' 
 
-export class Fimbox implements IFimbox {
+export class FormDrop implements IFormDrop {
     baseUrl: string
 
     constructor(baseUrl: string) {
         this.baseUrl = baseUrl
     }
 
-    async send(args: FimboxSendArgs) {
+    async send(args: FormDropSendArgs) {
         try {
             await $fetch(`${this.baseUrl.replace(/\/$/, '')}`, {
                 method: 'post',
@@ -17,8 +17,8 @@ export class Fimbox implements IFimbox {
                     'X-Captcha-Token': args.captchaToken
                 },
                 body: {
-                    tenantId: args.tenantId,
-                    formSubmissionData: args.formData
+                    formId: args.formId,
+                    formSubmissionData: args.data
                 },
                 retry: 3
             })

@@ -9,9 +9,9 @@ export default defineNuxtConfig({
                 global: true,
                 sitekey: '1x00000000000000000000AA'
             },
-            fimbox: {
-                url: process.env.FIMBOX_URL,
-                tenantId: process.env.FIMBOX_URL
+            formDrop: {
+                url: process.env.FORMDROP_URL,
+                formId: process.env.FORMDROP_FORMID
             }
         }
     },

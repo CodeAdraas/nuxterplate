@@ -1,5 +1,5 @@
 <template>
-    <form-fimbox
+    <form-drop
         submit-label="Submit"
         loading-label="Loading..."
         :captcha="{
@@ -31,5 +31,5 @@
             variant="textarea"
             :max="300"
         />
-    </form-fimbox>
+    </form-drop>
 </template>
