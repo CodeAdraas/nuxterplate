@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 
 interface Props {
-    label: string
+    name: string
     type?: 'text' | 'number' | 'email' | 'tel'
     variant?: 'input' | 'textarea'
     required?: boolean
@@ -17,7 +17,7 @@ const prop = withDefaults(defineProps<Props>(), {
 })
 const id = computed(() => {
     // Kind of quick random ID
-    return `input-${(new Date).valueOf()}-${prop.label.toLowerCase().replace(/ |\-/gi, '_')}`
+    return `input-${(new Date).valueOf()}-${prop.name.toLowerCase().replace(/ |\-/gi, '_')}`
 })
 const value = ref()
 const errorHelp = ref()
@@ -45,7 +45,7 @@ const onInvalid = (evt) => {
                 :is="variant"
                 :id="id"
                 :type="type"
-                :name="label"
+                :name="name"
                 :required="required"
                 :minlength="min"
                 :maxlength="max"
@@ -59,7 +59,7 @@ const onInvalid = (evt) => {
                 :for="id"
                 :class="{'filled': isFilled}"
             >
-                {{ label }}
+                <slot />
             </label>
         </div>
         <!--  -->

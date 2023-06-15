@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     },
 
     modules: [
-        '~/../src/module',
+        '../src/module',
     ],
 
     ssr: true,

@@ -3,7 +3,7 @@ import { ref, computed, type Ref } from 'vue'
 import MultiSelectOption from './multi-select-option.vue'
 
 interface Props {
-    label: string
+    name: string
     options: string[]
     required?: boolean
 }
@@ -45,7 +45,7 @@ const onInvalid = (evt) => {
 <template>
     <div class="form--multi-select">
         <div class="field">
-            <label>{{ label }}</label>
+            <label><slot /></label>
             <multi-select-option
                 v-for="checked, label, index in selectOptions"
                 :key="index"
@@ -56,7 +56,7 @@ const onInvalid = (evt) => {
             <input
                 ref="hiddenCheckbox"
                 type="checkbox"
-                :name="label"
+                :name="name"
                 :value="value"
                 :checked="!!value"
                 :required="required"

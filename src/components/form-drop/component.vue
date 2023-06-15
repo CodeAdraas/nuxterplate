@@ -18,7 +18,7 @@ interface Props {
         theme?: 'auto' | 'light' | 'dark'
         lang?: 'auto' | 'en' | 'de' | 'nl'
     }
-    formDrop: {
+    formDrop?: {
         url?: string
         formId?: string
     }
@@ -27,7 +27,7 @@ interface Props {
 const prop = defineProps<Props>()
 const runtimeConfig = useRuntimeConfig()
 const globalCaptcha = useCaptcha()
-const formDrop = useFormDrop(prop.formDrop?.url || runtimeConfig.public.formDrop.url)
+const formDrop = useFormDrop(prop?.formDrop?.url || runtimeConfig.public.formDrop.url)
 
 const captchaToken = ref()
 const validityMessage = ref()
@@ -54,7 +54,7 @@ const onSubmit = (formData: FormData) => {
 
     formDrop.send({
         captchaToken: captchaToken.value,
-        formId: prop.formDrop?.formId || runtimeConfig.public.formDrop.formId,
+        formId: prop?.formDrop?.formId || runtimeConfig.public.formDrop.formId,
         data: Object.fromEntries(formData.entries())
     })
         .then(() => setSuccessMessage(prop.successMessage))

@@ -11,25 +11,31 @@
         error-message="Error error error"
     >
         <form-input
-            label="Your name"
+            name="name"
             :min=3
-        />
+        >
+            Your name
+        </form-input>
         <form-input
-            label="Your e-mail"
+            name="email"
             type="email"
-        />
+        >
+            Your e-mail
+        </form-input>
         <form-multi-select
+            name="services"
             required
-            label="Select services"
-            :options="[
-                'Option 1',
-                'Option 2'
-            ]"
-        />
+            :options="['Option 1', 'Option 2']"
+        >
+            Select services
+        </form-multi-select>
         <form-input
-            label="Optional info"
+            name="optional-info"
+            label="optional-info"
             variant="textarea"
             :max="300"
-        />
+        >
+            Optional info
+        </form-input>
     </form-drop>
 </template>
