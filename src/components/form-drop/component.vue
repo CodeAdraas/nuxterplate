@@ -54,7 +54,7 @@ const onSubmit = (formData: FormData) => {
 
     formDrop.send({
         captchaToken: captchaToken.value,
-        formId: runtimeConfig.public.formDrop.formId,
+        formId: prop.formDrop?.formId || runtimeConfig.public.formDrop.formId,
         data: Object.fromEntries(formData.entries())
     })
         .then(() => setSuccessMessage(prop.successMessage))
