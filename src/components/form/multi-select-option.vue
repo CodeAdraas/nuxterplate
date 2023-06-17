@@ -33,7 +33,7 @@ defineProps<Props>()
     display: block;
     height: var(--multi-select-option-indicator-size, 0.8em);
     width: var(--multi-select-option-indicator-size, 0.8em);
-    border-radius: var(--multi-select-option-indicator-roundess, 50em);
+    border-radius: var(--multi-select-option-indicator-roundness, 50em);
     border: 1px solid var(--multi-select-option-indicator-color, #000);
     &.active {
         background-color: var(--multi-select-option-indicator-color, #000);
