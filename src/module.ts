@@ -9,9 +9,9 @@ import {
 const components = [
     ['Icon', './components/icon/component.vue'],
     ['UtilLazyImage', './components/util-lazy-image/component.vue'],
-    ['UtilScrollTextRevealLines', './components/util-scroll/text/reveal-lines.vue'],
-    ['UtilScrollTextRevealWords', './components/util-scroll/text/reveal-words.vue'],
-    ['UtilScrollTextRevealLetters', './components/util-scroll/text/reveal-letters.vue'],
+    ['ScrollTextRevealLines', './components/scroll/text/reveal-lines.vue'],
+    ['ScrollTextRevealWords', './components/scroll/text/reveal-words.vue'],
+    ['ScrollTextRevealLetters', './components/scroll/text/reveal-letters.vue'],
     ['UtilSlider', './components/util-slider/component.vue'],
     ['Captcha', './components/captcha/component.vue'],
     ['Faq', './components/faq/component.vue'],
