@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useScroll } from '../../../composables/scroll'
 import { useGsap } from '../../../composables/gsap'
 import { useSplitType } from '../../../composables/split-type'
@@ -9,12 +9,16 @@ interface Props {
     duration?: number
     stagger?: number
     delay?: number
+    direction?:
+        | 'vertical'
+        | 'horizontal'
 }
 
 const prop = withDefaults(defineProps<Props>(), {
     duration: 0.1,
     stagger: 0.01,
-    delay: 0
+    delay: 0,
+    direction: 'vertical'
 })
 
 const text = ref()
@@ -39,21 +43,45 @@ const mapFirstChild = (els: HTMLElement[]) => {
     return map
 }
 
+const getAnimationPropsFrom = computed(() => {
+    switch (prop.direction) {
+        case 'vertical':
+            return {y: '100%'}
+        case 'horizontal':
+            return {x: '-100%'}
+    }
+})
+
+const getAnimationPropsTo = computed(() => {
+    switch (prop.direction) {
+        case 'vertical':
+            return {y: 0}
+        case 'horizontal':
+            return {x: 0}
+    }
+})
+
 onMounted(() => {
     let splitted = split.split()
     if (!splitted.chars) return
+
     encapsulateDivs(splitted.chars, 'char')
-    gsap.set(mapFirstChild(splitted.chars), { y: '100%' })
-    const killEnter = scroll.enter(text, () => {
+    gsap.set(
+        mapFirstChild(splitted.chars),
+        getAnimationPropsFrom.value
+    )
+
+    const killOnScrollEnterHook = scroll.enter(text, () => {
         if (!splitted.chars) return
         gsap.to(mapFirstChild(splitted.chars), {
-            y: 0,
+            ...getAnimationPropsTo.value,
+
             duration: prop.duration,
             stagger: prop.stagger,
             delay: prop.delay,
             ease: 'expo.out',
             onCompleted: () => {
-                killEnter()
+                killOnScrollEnterHook()
             }
         })
     })
