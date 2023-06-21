@@ -94,6 +94,6 @@ input {
     padding: 0 0 0 var(--form-spacing-x, 1.5em);
     margin: var(--form-spacing-y, 1em) 0 0 0;
     font-size: var(--form-small-font-size, 0.8em);
-    color: var(--form-helper-color, gray);
+    color: var(--form-helper-color);
 }
 </style>

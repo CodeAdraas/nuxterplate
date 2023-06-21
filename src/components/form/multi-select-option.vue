@@ -17,9 +17,9 @@ defineProps<Props>()
 <style scoped lang="scss">
 .multi-select-option {
     position: relative;
-    background-color: var(--form-bg-color, #fff);
-    color: var(--form-color, #000);
-    border: 1px solid var(--form-color, #000);
+    background-color: var(--form-bg-color);
+    color: var(--form-color);
+    border: 1px solid var(--form-color);
     border-radius: var(--form-border-radius, 0.5em);
     overflow: hidden;
     padding: var(--form-spacing-y, 1em) var(--form-spacing-x, 1.5em);
@@ -34,9 +34,9 @@ defineProps<Props>()
     height: var(--multi-select-option-indicator-size, 0.8em);
     width: var(--multi-select-option-indicator-size, 0.8em);
     border-radius: var(--multi-select-option-indicator-roundness, 50em);
-    border: 1px solid var(--multi-select-option-indicator-color, #000);
+    border: 1px solid var(--multi-select-option-indicator-color);
     &.active {
-        background-color: var(--multi-select-option-indicator-color, #000);
+        background-color: var(--multi-select-option-indicator-color);
     }
 }
 

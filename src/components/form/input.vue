@@ -79,11 +79,11 @@ const onInvalid = (evt) => {
 
 input, textarea {
     width: 100%;
-    background-color: var(--form-bg-color, #fff);
-    color: var(--form-color, #000);
+    background-color: var(--form-bg-color);
+    color: var(--form-color);
     padding: var(--form-spacing-y, 1em) var(--form-spacing-x, 1.5em);
     border-radius: var(--form-border-radius, 0.5em);
-    border: 1px solid var(--form-color, #000);
+    border: 1px solid var(--form-color);
     font-size: var(--form-font-size, 1em);
 }
 
@@ -97,12 +97,12 @@ label {
     top: 50%;
     left: var(--form-spacing-x, 1.5em);
     transform: translateY(-50%);
-    color: var(--form-color, #000);
+    color: var(--form-color);
     font-size: var(--form-font-size, 1em);
     &.filled {
         top: 0;
         transform: translate(-5px, -50%);
-        background-color: var(--form-bg-color, #fff);
+        background-color: var(--form-bg-color);
         padding: 0 5px;
         font-size: var(--form-small-font-size, 0.8em);
     }
@@ -111,10 +111,10 @@ label {
 .is-validated input,
 .is-validated textarea {
     &:valid {
-        border-color: var(--form-valid-color, green);
+        border-color: var(--form-valid-color);
     }
     &:invalid {
-        border-color: var(--form-invalid-color, red);
+        border-color: var(--form-invalid-color);
     }
 }
 
@@ -123,6 +123,6 @@ label {
     padding: 0 0 0 var(--form-spacing-x, 1.5em);
     margin: var(--form-spacing-y, 1em) 0 0 0;
     font-size: var(--form-small-font-size, 0.8em);
-    color: var(--form-helper-color, gray);
+    color: var(--form-helper-color);
 }
 </style>
