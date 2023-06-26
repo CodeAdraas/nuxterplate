@@ -92,7 +92,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
     // @ts-ignore
-    window.turnstile.remove(widgetId)
+    window?.turnstile?.remove(widgetId)
 })
 </script>
 
