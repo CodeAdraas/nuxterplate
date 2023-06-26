@@ -6,6 +6,10 @@ import {
     addPlugin,
 } from '@nuxt/kit'
 
+interface Options {
+    cmsCss?: boolean
+}
+
 const components = [
     ['Icon', './components/icon/component.vue'],
     ['UtilLazyImage', './components/util-lazy-image/component.vue'],
@@ -30,12 +34,15 @@ export default defineNuxtModule({
             nuxt: '^3.4.3'
         }
     },
-    setup(moduleOptions, nuxt) {
+    setup(moduleOptions: Options, nuxt) {
         const resolver = createResolver(import.meta.url)
+        const optOutCmsCss = moduleOptions?.cmsCss || false
 
         nuxt.options.css.push('swiper/css')
         nuxt.options.css.push(resolver.resolve('assets/breakpoint.css'))
-        nuxt.options.css.push(resolver.resolve('assets/cms.css'))
+        if (! optOutCmsCss) {
+            nuxt.options.css.push(resolver.resolve('assets/cms.css'))
+        }
 
         for (let [name, filePath] of components) addComponent({
             name,
