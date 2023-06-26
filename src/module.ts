@@ -6,7 +6,7 @@ import {
     addPlugin,
 } from '@nuxt/kit'
 
-interface Options {
+interface NuxterplateModuleOptions {
     cmsCss?: boolean
 }
 
@@ -27,20 +27,22 @@ const components = [
     ['FormDrop', './components/form-drop/component.vue'],
 ]
 
-export default defineNuxtModule({
+export default defineNuxtModule<NuxterplateModuleOptions>({
     meta: {
         name: 'nuxterplate',
         compatibility: {
             nuxt: '^3.4.3'
         }
     },
-    setup(moduleOptions: Options, nuxt) {
+    defaults: nuxt => ({
+        cmsCss: true
+    }),
+    setup(moduleOptions, nuxt) {
         const resolver = createResolver(import.meta.url)
-        const optOutCmsCss = moduleOptions?.cmsCss || false
 
         nuxt.options.css.push('swiper/css')
         nuxt.options.css.push(resolver.resolve('assets/css/breakpoint.css'))
-        if (! optOutCmsCss) {
+        if (moduleOptions.cmsCss) {
             nuxt.options.css.push(resolver.resolve('assets/css/cms.css'))
         }
 
