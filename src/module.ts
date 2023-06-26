@@ -39,9 +39,9 @@ export default defineNuxtModule({
         const optOutCmsCss = moduleOptions?.cmsCss || false
 
         nuxt.options.css.push('swiper/css')
-        nuxt.options.css.push(resolver.resolve('assets/breakpoint.css'))
+        nuxt.options.css.push(resolver.resolve('assets/css/breakpoint.css'))
         if (! optOutCmsCss) {
-            nuxt.options.css.push(resolver.resolve('assets/cms.css'))
+            nuxt.options.css.push(resolver.resolve('assets/css/cms.css'))
         }
 
         for (let [name, filePath] of components) addComponent({
