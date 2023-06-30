@@ -1,4 +1,4 @@
-import { FormDrop } from './core'
+import { FormDrop } from '../lib/formdrop'
 
 
 export const useFormDrop = (baseUrl: string) => {

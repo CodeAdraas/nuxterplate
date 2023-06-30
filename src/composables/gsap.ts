@@ -1,6 +1,1 @@
-import gsap from 'gsap'
-
-
-export const useGsap = () => {
-  return gsap
-}
+export { default as gsap } from 'gsap'

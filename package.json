@@ -9,7 +9,6 @@
   },
   "main": "src/module.ts",
   "module": "src/module.ts",
-  "types": "src/nuxterplate.types.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodeAdraas/nuxterplate.git"

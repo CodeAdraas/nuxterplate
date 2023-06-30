@@ -1,4 +1,4 @@
-import { FormDrop as IFormDrop, FormDropSendArgs } from './types'
+import type { FormDrop as IFormDrop, FormDropSendArgs } from './types'
 import { $fetch } from 'ofetch' 
 
 export class FormDrop implements IFormDrop {

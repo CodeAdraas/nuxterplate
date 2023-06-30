@@ -1,14 +1,13 @@
 import { ref } from 'vue'
-import { Scroll, type ScrollOptions } from './core'
-export { Intersect } from './intersect'
+import { Scroll, type ScrollOptions } from '../scroll'
 
 var instance: Scroll
 
 export const useScroll = (options?: ScrollOptions) => {
-  if(!instance || typeof options !== 'undefined') {
-    instance = new Scroll(options)
-  }
-  return instance
+    if(!instance || typeof options !== 'undefined') {
+        instance = new Scroll(options)
+    }
+    return instance
 }
 
 export const useScrollDirection = () => {
