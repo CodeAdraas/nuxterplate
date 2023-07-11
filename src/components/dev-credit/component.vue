@@ -6,12 +6,8 @@ interface Props {
     height?: number,
     theme?:
         | 'default'
-        | 'volcano'
-        | 'invisible'
-        | 'invisible-hc'
-        | 'dark'
-        | 'blue'
-        | 'gray'
+        | 'white'
+        | 'white-hc'
 }
 
 const prop = defineProps<Props>()
@@ -23,11 +19,10 @@ const theme_ = computed(
 
 <template>
     <iframe
-        border-
-        :height="`${height || 60}px`"
-        width="100%"
-        frameborder="0"
-        :src="`https://credit.achoendov.media?theme=${theme_}`"
         loading="lazy"
+        :src="`https://credit.achoendov.media?theme=${theme_}`"
+        width="100%"
+        :height="`${height || 80}px`"
+        frameborder="0"
     />
 </template>

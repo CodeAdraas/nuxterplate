@@ -18,12 +18,10 @@ const runtimeConfig = useRuntimeConfig()
     <seo-kit />
     <Header />
     <slot />
-    <client-only>
-        <Footer />
-        <captcha
-            v-if="runtimeConfig.public.captcha?.global"
-            global
-        />
-        <dev-credit v-if="credits" />
-    </client-only>
+    <Footer />
+    <captcha
+        v-if="runtimeConfig.public.captcha?.global"
+        global
+    />
+    <dev-credit v-if="credits" />
 </template>
